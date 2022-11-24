@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import NavigationBar from './Components/NavigationBar';
+import AllTasks from "./routes/AllTasks"
+import Calendar from "./routes/Calendar"
+import ErrorPage from "./routes/ErrorPage"
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/Calendar",
+    element: <Calendar />,
+  },  
+  {
+    path: "/AllTasks",
+    element: <AllTasks />,
+  }
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<>
+<NavigationBar />
+<RouterProvider router={router} />
+</>
   );
 }
 
