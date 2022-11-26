@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
 
-export default function AllTasks () {
-    return(
-        <div>
-            <h1>
-                ТЕСТ ЗАДАНИЯ
-            </h1>
-        </div>
-        )}
+import TodoList from "../Components/TodoList";
+import removeTodo from "../App";
+import toggleComplete from "../App";
+export default function AllTasks({ todos, setTodos }) {
+  return (
+    <div>
+      <h1>ТЕСТ ЗАДАНИЯ</h1>
+    </div>
+  );
+}
