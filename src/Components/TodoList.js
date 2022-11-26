@@ -21,7 +21,9 @@ function TodoList({ todos, setTodos }) {
     setTodos(todos.filter((todo) => todo.id !== id));
   }
   return (
-    <List>
+    <List 
+      alignItems="center"
+    >
       {todos.map((todo) => (
         <Todo
           key={todo.id}
