@@ -10,23 +10,11 @@ import TodoList from "./Components/TodoList";
 import { useEffect, useState } from "react"; //
 const LOCAL_STORAGE_KEY = "react-todo-list-todos"; //
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "/Calendar",
-    element: <Calendar />
-  },
-  {
-    path: "/AllTasks",
-    element: <AllTasks todos setTodos />
-  }
-]);
+
 
 function App() {
   const [todos, setTodos] = useState([]); //
+
   useEffect(() => {
     const storageTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     if (storageTodos) {
@@ -37,6 +25,21 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      errorElement: <ErrorPage />
+    },
+    {
+      path: "/Calendar",
+      element: <Calendar />
+    },
+    {
+      path: "/AllTasks",
+      element: <AllTasks todos={todos} setTodos={setTodos} />
+    }
+  ]);
 
   return (
     <>
