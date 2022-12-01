@@ -1,20 +1,20 @@
-import { Button, TextField } from "@material-ui/core";
 import React, { useState } from "react";
+import { Button, TextField } from "@material-ui/core";
 import { v4 as uuid } from "uuid";
 
-function TodoForm({ todos, setTodos }) {
-  const [todo, setTodo] = useState({
-    id: "",
-    //userid: "",
-    date: "",
-    endDate: "",
-    //time: "",
-    task: "",
-    completed: false
-  });
+function EditTodoForm({ editTodo, todos, setTodos }) {
+  const [todo, setTodo] = useState(editTodo);
 
-  function addTodo(todo) {
-    setTodos([todo, ...todos]);
+  function handleSubmit(e) {
+    e.preventDefault();
+    setTodos(
+      todos.map((item) => {
+        if(item.id === todo.id)
+          return {
+            ...todo
+          };
+        })
+    );
   }
 
   function handleTaskInputChangetask(e) {
@@ -27,19 +27,12 @@ function TodoForm({ todos, setTodos }) {
   function handleTaskInputChangedate2(e) {
     setTodo({ ...todo, endDate: e.target.value });
   }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (todo.task.trim()) {
-      addTodo({ ...todo, id: uuid() });
-      setTodo({ ...todo, task: "", userid: "" });
-    }
-  }
+  
   return (
-    <form id="form" className="todo-form" onSubmit={handleSubmit}>
+    <form id="form" className="todo-form" onSubmit={handleSubmit} >
       <div>
         <TextField
-          label="Опишите задачу, укажите требуемые время и дату"
+          label="Задача"
           type="text"
           fullWidth="true"
           name="task"
@@ -55,8 +48,8 @@ function TodoForm({ todos, setTodos }) {
           }}
           type="date"
           fullWidth="true"
-          name="task"
-          value={todo.userid}
+          name="date"
+          value={todo.date}
           onChange={handleTaskInputChangedate1}
         />
       </div>
@@ -68,9 +61,8 @@ function TodoForm({ todos, setTodos }) {
           }}
           type="date"
           fullWidth="true"
-          preventDefault="none"
-          name="task"
-          value={todo.userid}
+          name="endDate"
+          value={todo.endDate}
           onChange={handleTaskInputChangedate2}
         />
       </div>
@@ -78,5 +70,4 @@ function TodoForm({ todos, setTodos }) {
   );
 }
 
-export default TodoForm;
-
+export default EditTodoForm;

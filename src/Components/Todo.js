@@ -1,15 +1,19 @@
+import React, {useState} from "react";
 import { Checkbox, Button, ListItem, Typography } from "@material-ui/core";
 import { Card, CardContent, CardActions, Chip, Stack } from '@mui/material';
-import CloseIcon from "@material-ui/icons/Close";
-import React from "react";
 
-function Todo({ todo, toggleComplete, removeTodo }) {
+function Todo({ todo, toggleComplete, removeTodo, handleOpenDialog }) {
+
   function handleCheckboxClick() {
     toggleComplete(todo.id);
   }
 
   function handleRemoveClick() {
     removeTodo(todo.id);
+  }
+
+  function handleEditTodo() {
+    handleOpenDialog(todo);
   }
 
   return (
@@ -40,12 +44,15 @@ function Todo({ todo, toggleComplete, removeTodo }) {
               variant="contained" 
               onClick={handleCheckboxClick} 
               style={{
-                backgroundColor: "#1976d2"
+                backgroundColor: "#1976d2",
               }}
             >
               Задача сделана
             </Button>
           }
+          <Button onClick={handleEditTodo}>
+            Редактировать
+          </Button>
           <Button onClick={handleRemoveClick}>
             Закрыть задачу
           </Button>
@@ -56,3 +63,5 @@ function Todo({ todo, toggleComplete, removeTodo }) {
 }
 
 export default Todo;
+
+//TODO: сделать редактирование удаление
